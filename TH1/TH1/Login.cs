@@ -6,6 +6,12 @@ namespace TH1
     public partial class Login : Form
     {
         private string filePath = "account.txt";
+        private string folderPath = "data";
+
+        public string GetUserPath(string username)
+        {
+            return Path.Combine(folderPath, username + ".txt");
+        }
         public Login()
         {
             InitializeComponent();
@@ -27,26 +33,21 @@ namespace TH1
             string password = TBpassword.Text.Trim();
             if (username.Length != 0 || password.Length != 0)
             {
-                string[] line = File.ReadAllLines(filePath);
-                foreach (string line2 in line)
+                if (!File.Exists(GetUserPath(username)))
                 {
-                    string[] path = line2.Split('|');
-                    if (path.Length == 3 && path[0] == username)
-                    {
-                        if (path[2] == password)
-                        {
-                            MessageBox.Show("Đăng nhập thành công!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Mật khẩu không chính xác!");
-                            MessageBox.Show(password + '-' + path[2]);
-                        }
-                        return;
-                    }
+                    MessageBox.Show("Tên tài khoản không tồn tại!");
+                    return;
                 }
-                MessageBox.Show("Tên tài khoản không tồn tại!");
-
+                else if (File.ReadAllLines(GetUserPath(username))[2] != password)
+                {
+                    MessageBox.Show("Mật khẩu không chính xác!");
+                    return;
+                }
+                Hide();
+                MessageBox.Show("Đăng nhập thành công!");
+                Home form_home = new Home(username);
+                form_home.ShowDialog();
+                Show();
             }
         }
 

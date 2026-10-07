@@ -11,6 +11,12 @@ namespace TH1
     public partial class SignUp : Form
     {
         private string filePath = "account.txt";
+        private string folderPath = "data";
+
+        public string GetUserPath(string username)
+        {
+            return Path.Combine(folderPath, username);
+        }
 
         public SignUp()
         {
@@ -55,6 +61,16 @@ namespace TH1
             }
             string account = $"{username}|{email}|{password}\n";
             File.AppendAllText(filePath, account);
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            string file = GetUserPath(username+".txt");
+            string account2 = $"{username}\n{email}\n{password}";
+            File.AppendAllText(file, account2);
+
             MessageBox.Show("Đăng ký tài khoản thành công!");
             Close();
         }

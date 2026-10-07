@@ -35,3 +35,6 @@ D:\C#\VPL\TH1\TH1\obj\Debug\net10.0-windows\TH1.csproj.Up2Date
 D:\C#\VPL\TH1\TH1\obj\Debug\net10.0-windows\TH1.Login.resources
 D:\C#\VPL\TH1\TH1\obj\Debug\net10.0-windows\TH1.QuenMK.resources
 D:\C#\VPL\TH1\TH1\obj\Debug\net10.0-windows\TH1.SignUp.resources
+D:\C#\VPL\TH1\TH1\obj\Debug\net10.0-windows\TH1.Form1.resources
+D:\C#\VPL\TH1\TH1\obj\Debug\net10.0-windows\TH1.Profile.resources
+D:\C#\VPL\TH1\TH1\obj\Debug\net10.0-windows\TH1.sourcelink.json

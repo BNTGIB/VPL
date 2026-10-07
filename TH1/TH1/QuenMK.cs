@@ -13,6 +13,13 @@ namespace TH1
     public partial class QuenMK : Form
     {
         private string filePath = "account.txt";
+        private string folderPath = "data";
+
+        public string GetUserPath(string username)
+        {
+            return Path.Combine(folderPath, username + ".txt");
+        }
+
         public QuenMK()
         {
             InitializeComponent();
@@ -42,16 +49,18 @@ namespace TH1
             }
 
             List<string> lines = File.ReadAllLines(filePath).ToList();
+            List<string> parts = new List<string> { };
 
             bool changes = false;
             for (int i=0; i<lines.Count(); i++)
             {
-                List<string> parts = lines[i].Split('|').ToList();
+                parts = lines[i].Split('|').ToList();
                 if (parts.Count() == 3 && parts[1] == email)
                 {
                     changes = true;
                     parts[2] = password;
                     lines[i] = $"{parts[0]}|{parts[1]}|{parts[2]}\n";
+                    break;
                 }
             }
             if (!changes)
@@ -61,8 +70,12 @@ namespace TH1
             }
             else
             {
+
                 File.WriteAllLines(filePath, lines);
+                string account2 = $"{parts[0]}\n{parts[1]}\n{parts[2]}";
+                File.WriteAllText(GetUserPath(parts[0]), account2);
                 MessageBox.Show("Đổi mật khẩu thành công!");
+                
                 Close();
             }
         }
