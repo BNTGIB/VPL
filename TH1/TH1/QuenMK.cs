@@ -59,7 +59,7 @@ namespace TH1
                 {
                     changes = true;
                     parts[4] = password;
-                    lines[i] = $"{parts[0]}|{parts[1]}|{parts[2]}|{parts[3]}|{parts[4]}\n";
+                    lines[i] = $"{parts[0]}|{parts[1]}|{parts[2]}|{parts[3]}|{parts[4]}";
                     break;
                 }
             }

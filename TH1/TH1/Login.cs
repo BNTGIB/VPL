@@ -46,6 +46,7 @@ namespace TH1
                 Hide();
                 Home form_home = new Home(username);
                 form_home.ShowDialog();
+                Close();
             }
         }
 

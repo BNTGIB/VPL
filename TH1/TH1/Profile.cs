@@ -106,7 +106,7 @@ namespace TH1
                         parts[3] = newdiachi=="" ? "(Trống)" : newdiachi;
                     }
 
-                    lines[i] = $"{parts[0]}|{parts[1]}|{parts[2]}|{parts[3]}|{parts[4]}\n";
+                    lines[i] = $"{parts[0]}|{parts[1]}|{parts[2]}|{parts[3]}|{parts[4]}";
                     break;
                 }
             }
