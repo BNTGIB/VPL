@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             BTN_profile = new Button();
+            label4 = new Label();
             SuspendLayout();
             // 
             // BTN_profile
@@ -40,22 +41,36 @@
             BTN_profile.TabIndex = 20;
             BTN_profile.Text = "Profile";
             BTN_profile.UseVisualStyleBackColor = true;
-            BTN_profile.Click += this.BTN_profile_Click;
+            BTN_profile.Click += BTN_profile_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Black", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(285, 41);
+            label4.Name = "label4";
+            label4.Size = new Size(226, 46);
+            label4.TabIndex = 21;
+            label4.Text = "TRANG CHỦ";
             // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label4);
             Controls.Add(BTN_profile);
             Name = "Home";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
-            Load += this.Home_Load;
+            Load += Home_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button BTN_profile;
+        private Label label4;
     }
 }

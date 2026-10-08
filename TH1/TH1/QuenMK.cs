@@ -55,11 +55,11 @@ namespace TH1
             for (int i=0; i<lines.Count(); i++)
             {
                 parts = lines[i].Split('|').ToList();
-                if (parts.Count() == 3 && parts[1] == email)
+                if (parts.Count() == 5 && parts[1] == email)
                 {
                     changes = true;
-                    parts[2] = password;
-                    lines[i] = $"{parts[0]}|{parts[1]}|{parts[2]}\n";
+                    parts[4] = password;
+                    lines[i] = $"{parts[0]}|{parts[1]}|{parts[2]}|{parts[3]}|{parts[4]}\n";
                     break;
                 }
             }
@@ -72,7 +72,7 @@ namespace TH1
             {
 
                 File.WriteAllLines(filePath, lines);
-                string account2 = $"{parts[0]}\n{parts[1]}\n{parts[2]}";
+                string account2 = $"{parts[0]}\n{parts[1]}\n{parts[2]}\n{parts[3]}\n{parts[4]}\n";
                 File.WriteAllText(GetUserPath(parts[0]), account2);
                 MessageBox.Show("Đổi mật khẩu thành công!");
                 

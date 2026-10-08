@@ -35,7 +35,10 @@
             LB_username = new Label();
             BTN_Save = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            BTN_out = new Button();
+            TB_Diachi = new TextBox();
+            TB_sdt = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // label4
@@ -50,22 +53,22 @@
             // 
             // TB_email
             // 
-            TB_email.Location = new Point(191, 176);
+            TB_email.Location = new Point(194, 124);
             TB_email.Name = "TB_email";
-            TB_email.Size = new Size(248, 27);
+            TB_email.Size = new Size(244, 27);
             TB_email.TabIndex = 16;
             // 
             // TB_username
             // 
-            TB_username.Location = new Point(191, 110);
+            TB_username.Location = new Point(194, 91);
             TB_username.Name = "TB_username";
-            TB_username.Size = new Size(248, 27);
+            TB_username.Size = new Size(244, 27);
             TB_username.TabIndex = 15;
             // 
             // LB_email
             // 
             LB_email.AutoSize = true;
-            LB_email.Location = new Point(139, 183);
+            LB_email.Location = new Point(142, 131);
             LB_email.Name = "LB_email";
             LB_email.Size = new Size(49, 20);
             LB_email.TabIndex = 14;
@@ -75,7 +78,7 @@
             // 
             LB_username.AutoSize = true;
             LB_username.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LB_username.Location = new Point(110, 113);
+            LB_username.Location = new Point(113, 94);
             LB_username.Name = "LB_username";
             LB_username.Size = new Size(78, 20);
             LB_username.TabIndex = 13;
@@ -92,28 +95,57 @@
             BTN_Save.UseVisualStyleBackColor = true;
             BTN_Save.Click += BTN_Save_Click;
             // 
-            // BTN_out
+            // TB_Diachi
             // 
-            BTN_out.Location = new Point(506, 286);
-            BTN_out.Name = "BTN_out";
-            BTN_out.Size = new Size(74, 29);
-            BTN_out.TabIndex = 19;
-            BTN_out.Text = "Log Out";
-            BTN_out.UseVisualStyleBackColor = true;
+            TB_Diachi.Location = new Point(194, 194);
+            TB_Diachi.Name = "TB_Diachi";
+            TB_Diachi.Size = new Size(244, 27);
+            TB_Diachi.TabIndex = 23;
+            // 
+            // TB_sdt
+            // 
+            TB_sdt.Location = new Point(194, 161);
+            TB_sdt.Name = "TB_sdt";
+            TB_sdt.Size = new Size(244, 27);
+            TB_sdt.TabIndex = 22;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(128, 197);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 20);
+            label1.TabIndex = 21;
+            label1.Text = "Địa Chỉ:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(149, 164);
+            label2.Name = "label2";
+            label2.Size = new Size(39, 20);
+            label2.TabIndex = 20;
+            label2.Text = "SĐT:";
             // 
             // Profile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(592, 327);
-            Controls.Add(BTN_out);
+            Controls.Add(TB_Diachi);
+            Controls.Add(TB_sdt);
+            Controls.Add(label1);
+            Controls.Add(label2);
             Controls.Add(BTN_Save);
             Controls.Add(TB_email);
             Controls.Add(TB_username);
             Controls.Add(LB_email);
             Controls.Add(LB_username);
             Controls.Add(label4);
+            ForeColor = SystemColors.ControlText;
             Name = "Profile";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Profile_Load;
             ResumeLayout(false);
@@ -129,6 +161,9 @@
         private Label LB_username;
         private Button BTN_Save;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private Button BTN_out;
+        private TextBox TB_Diachi;
+        private TextBox TB_sdt;
+        private Label label1;
+        private Label label2;
     }
 }

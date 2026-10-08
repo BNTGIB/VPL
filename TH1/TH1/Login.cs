@@ -38,16 +38,14 @@ namespace TH1
                     MessageBox.Show("Tên tài khoản không tồn tại!");
                     return;
                 }
-                else if (File.ReadAllLines(GetUserPath(username))[2] != password)
+                else if (File.ReadAllLines(GetUserPath(username))[File.ReadAllLines(GetUserPath(username)).Length - 1] != password)
                 {
                     MessageBox.Show("Mật khẩu không chính xác!");
                     return;
                 }
                 Hide();
-                MessageBox.Show("Đăng nhập thành công!");
                 Home form_home = new Home(username);
                 form_home.ShowDialog();
-                Show();
             }
         }
 
