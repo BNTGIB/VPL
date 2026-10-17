@@ -42,12 +42,15 @@
             BNT_find = new Button();
             TB_find = new TextBox();
             DGB_sanpham = new DataGridView();
-            ID = new DataGridViewTextBoxColumn();
-            Ten = new DataGridViewTextBoxColumn();
-            SL = new DataGridViewTextBoxColumn();
-            Price = new DataGridViewTextBoxColumn();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
+            LB_dvt = new Label();
+            comboBox_dvt = new ComboBox();
+            MaSP = new DataGridViewTextBoxColumn();
+            TenSP = new DataGridViewTextBoxColumn();
+            DonGia = new DataGridViewTextBoxColumn();
+            SL = new DataGridViewTextBoxColumn();
+            DVT = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)DGB_sanpham).BeginInit();
             SuspendLayout();
             // 
@@ -114,53 +117,59 @@
             // BTN_add
             // 
             BTN_add.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold);
-            BTN_add.Location = new Point(12, 157);
+            BTN_add.Location = new Point(19, 208);
             BTN_add.Name = "BTN_add";
             BTN_add.Size = new Size(100, 35);
             BTN_add.TabIndex = 9;
             BTN_add.Text = "Thêm";
             BTN_add.UseVisualStyleBackColor = true;
+            BTN_add.Click += BTN_add_Click;
             // 
             // BTN_delete
             // 
             BTN_delete.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold);
-            BTN_delete.Location = new Point(118, 157);
+            BTN_delete.Location = new Point(125, 208);
             BTN_delete.Name = "BTN_delete";
             BTN_delete.Size = new Size(100, 35);
             BTN_delete.TabIndex = 10;
             BTN_delete.Text = "Xoá";
             BTN_delete.UseVisualStyleBackColor = true;
+            BTN_delete.Click += BTN_delete_Click;
             // 
             // BTN_Change
             // 
             BTN_Change.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold);
-            BTN_Change.Location = new Point(224, 155);
+            BTN_Change.Location = new Point(231, 208);
             BTN_Change.Name = "BTN_Change";
             BTN_Change.Size = new Size(100, 35);
             BTN_Change.TabIndex = 11;
             BTN_Change.Text = "Sửa";
             BTN_Change.UseVisualStyleBackColor = true;
+            BTN_Change.Click += BTN_Change_Click;
             // 
             // BNT_find
             // 
             BNT_find.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold);
-            BNT_find.Location = new Point(814, 155);
+            BNT_find.Location = new Point(821, 208);
             BNT_find.Name = "BNT_find";
             BNT_find.Size = new Size(100, 35);
             BNT_find.TabIndex = 12;
             BNT_find.Text = "Tìm kiếm";
             BNT_find.UseVisualStyleBackColor = true;
+            BNT_find.Click += BNT_find_Click;
             // 
             // TB_find
             // 
-            TB_find.Location = new Point(378, 161);
+            TB_find.Location = new Point(385, 214);
             TB_find.Name = "TB_find";
             TB_find.Size = new Size(430, 27);
             TB_find.TabIndex = 13;
             // 
             // DGB_sanpham
             // 
-            DGB_sanpham.Anchor = AnchorStyles.None;
+            DGB_sanpham.AllowUserToResizeRows = false;
+            DGB_sanpham.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DGB_sanpham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
@@ -170,49 +179,16 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             DGB_sanpham.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DGB_sanpham.ColumnHeadersHeight = 29;
-            DGB_sanpham.Columns.AddRange(new DataGridViewColumn[] { ID, Ten, SL, Price });
-            DGB_sanpham.Location = new Point(12, 220);
+            DGB_sanpham.Columns.AddRange(new DataGridViewColumn[] { MaSP, TenSP, DonGia, SL, DVT });
+            DGB_sanpham.Location = new Point(12, 263);
+            DGB_sanpham.MultiSelect = false;
             DGB_sanpham.Name = "DGB_sanpham";
             DGB_sanpham.RowHeadersVisible = false;
             DGB_sanpham.RowHeadersWidth = 51;
-            DGB_sanpham.Size = new Size(946, 331);
+            DGB_sanpham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGB_sanpham.Size = new Size(946, 447);
             DGB_sanpham.TabIndex = 14;
-            // 
-            // ID
-            // 
-            ID.FillWeight = 85.57823F;
-            ID.HeaderText = "Mã Sản Phẩm";
-            ID.MinimumWidth = 6;
-            ID.Name = "ID";
-            ID.ReadOnly = true;
-            ID.Width = 200;
-            // 
-            // Ten
-            // 
-            Ten.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Ten.FillWeight = 139.258179F;
-            Ten.HeaderText = "Tên sản phẩm";
-            Ten.MinimumWidth = 6;
-            Ten.Name = "Ten";
-            Ten.ReadOnly = true;
-            // 
-            // SL
-            // 
-            SL.FillWeight = 38.1243858F;
-            SL.HeaderText = "Số Lượng";
-            SL.MinimumWidth = 6;
-            SL.Name = "SL";
-            SL.ReadOnly = true;
-            SL.Width = 90;
-            // 
-            // Price
-            // 
-            Price.FillWeight = 140.540573F;
-            Price.HeaderText = "Đơn giá";
-            Price.MinimumWidth = 6;
-            Price.Name = "Price";
-            Price.ReadOnly = true;
-            Price.Width = 260;
+            DGB_sanpham.CellClick += DGB_sanpham_CellClick;
             // 
             // textBox1
             // 
@@ -228,11 +204,75 @@
             textBox2.Size = new Size(370, 27);
             textBox2.TabIndex = 16;
             // 
+            // LB_dvt
+            // 
+            LB_dvt.AutoSize = true;
+            LB_dvt.Location = new Point(27, 163);
+            LB_dvt.Name = "LB_dvt";
+            LB_dvt.Size = new Size(83, 20);
+            LB_dvt.TabIndex = 18;
+            LB_dvt.Text = "Đơn bị tính";
+            // 
+            // comboBox_dvt
+            // 
+            comboBox_dvt.FormattingEnabled = true;
+            comboBox_dvt.Location = new Point(116, 163);
+            comboBox_dvt.Name = "comboBox_dvt";
+            comboBox_dvt.Size = new Size(215, 28);
+            comboBox_dvt.TabIndex = 19;
+            // 
+            // MaSP
+            // 
+            MaSP.DataPropertyName = "MaSP";
+            MaSP.FillWeight = 15F;
+            MaSP.HeaderText = "Mã Sản Phẩm";
+            MaSP.MinimumWidth = 6;
+            MaSP.Name = "MaSP";
+            MaSP.ReadOnly = true;
+            // 
+            // TenSP
+            // 
+            TenSP.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            TenSP.DataPropertyName = "TenSP";
+            TenSP.FillWeight = 24.79312F;
+            TenSP.HeaderText = "Tên sản phẩm";
+            TenSP.MinimumWidth = 6;
+            TenSP.Name = "TenSP";
+            TenSP.ReadOnly = true;
+            // 
+            // DonGia
+            // 
+            DonGia.DataPropertyName = "DonGia";
+            DonGia.FillWeight = 20F;
+            DonGia.HeaderText = "Đơn giá";
+            DonGia.MinimumWidth = 6;
+            DonGia.Name = "DonGia";
+            DonGia.ReadOnly = true;
+            // 
+            // SL
+            // 
+            SL.DataPropertyName = "SL";
+            SL.FillWeight = 6.78755426F;
+            SL.HeaderText = "Số Lượng";
+            SL.MinimumWidth = 6;
+            SL.Name = "SL";
+            SL.ReadOnly = true;
+            // 
+            // DVT
+            // 
+            DVT.DataPropertyName = "DVT";
+            DVT.FillWeight = 10F;
+            DVT.HeaderText = "Đơn vị";
+            DVT.MinimumWidth = 6;
+            DVT.Name = "DVT";
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(970, 563);
+            ClientSize = new Size(970, 722);
+            Controls.Add(comboBox_dvt);
+            Controls.Add(LB_dvt);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(DGB_sanpham);
@@ -251,6 +291,7 @@
             Name = "Form2";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form2";
+            Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)DGB_sanpham).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -275,9 +316,12 @@
         private DataGridView DGB_sanpham;
         private TextBox textBox1;
         private TextBox textBox2;
-        private DataGridViewTextBoxColumn ID;
-        private DataGridViewTextBoxColumn Ten;
+        private Label LB_dvt;
+        private ComboBox comboBox_dvt;
+        private DataGridViewTextBoxColumn MaSP;
+        private DataGridViewTextBoxColumn TenSP;
+        private DataGridViewTextBoxColumn DonGia;
         private DataGridViewTextBoxColumn SL;
-        private DataGridViewTextBoxColumn Price;
+        private DataGridViewTextBoxColumn DVT;
     }
 }

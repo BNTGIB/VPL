@@ -22,6 +22,12 @@ namespace TH1
         {
             InitializeComponent();
         }
+        private void SignUp_Load(object sender, EventArgs e)
+        {
+            string[] sex_items = { "Nam", "Nữ", "Không tiết lộ" };
+            cB_sex.Items.AddRange(sex_items);
+            cB_sex.SelectedItem = "Không tiết lộ";
+        }
 
         private void BTN_signup_Click(object sender, EventArgs e)
         {
@@ -29,17 +35,42 @@ namespace TH1
             string email = TB_email.Text.Trim();
             string sdt = TB_sdt.Text.Trim();
             string diachi = TB_Diachi.Text.Trim();
+            diachi = diachi == "" ? "(Trống)" : diachi;
             string password = TB_password.Text.Trim();
             string cfpassword = TB_cfpassword.Text.Trim();
+            string? g = cB_sex.SelectedItem.ToString();
+            string giotinh = g;
 
-            if (username == "" || password == "" || cfpassword == "" || email == "" || sdt == "" || diachi == "")
+            LB_lack_username.Visible = false;
+            LB_lack_email.Visible = false;
+            LB_lack_sdt.Visible = false;
+            LB_lack_password.Visible = false;
+
+            if (username == "" || password == "" || cfpassword == "" || email == "" || sdt == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                if (username == "")
+                {
+                    LB_lack_username.Visible = true;
+                }
+                if (email == "")
+                {
+                    LB_lack_email.Visible = true;
+                }
+                if (sdt == "")
+                {
+                    LB_lack_sdt.Visible = true;
+                }
+                if (password == "")
+                {
+                    LB_lack_password.Visible = true;
+                }
                 return;
             }
             else if (password != cfpassword)
             {
                 MessageBox.Show("Mật khẩu không trùng khớp!");
+                LB_wrong_cfpassword.Visible = true;
                 return;
             }
 
@@ -59,7 +90,8 @@ namespace TH1
                         MessageBox.Show("Usename hoặc email đã được tồn tại!");
                         return;
                     }
-                    else if (path.Length > 4 && path[2] == sdt) {
+                    else if (path.Length > 4 && path[2] == sdt)
+                    {
                         MessageBox.Show("Số điện thoại đã được đăng ký ở tài khoản khác!");
                         return;
                     }
@@ -81,7 +113,7 @@ namespace TH1
             Close();
         }
 
-        private void SignUp_Load(object sender, EventArgs e)
+        private void cB_sex_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

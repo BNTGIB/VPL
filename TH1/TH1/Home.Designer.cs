@@ -35,9 +35,9 @@
             // BTN_profile
             // 
             BTN_profile.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            BTN_profile.Location = new Point(673, 12);
+            BTN_profile.Location = new Point(697, 12);
             BTN_profile.Name = "BTN_profile";
-            BTN_profile.Size = new Size(115, 53);
+            BTN_profile.Size = new Size(91, 39);
             BTN_profile.TabIndex = 20;
             BTN_profile.Text = "Profile";
             BTN_profile.UseVisualStyleBackColor = true;
@@ -47,7 +47,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Black", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(285, 41);
+            label4.Location = new Point(285, 35);
             label4.Name = "label4";
             label4.Size = new Size(226, 46);
             label4.TabIndex = 21;
