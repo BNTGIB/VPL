@@ -243,27 +243,27 @@
             // 
             newToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fileToolStripMenuItem1, folderToolStripMenuItem });
             newToolStripMenuItem.Name = "newToolStripMenuItem";
-            newToolStripMenuItem.Size = new Size(224, 26);
+            newToolStripMenuItem.Size = new Size(122, 26);
             newToolStripMenuItem.Text = "New";
             // 
             // fileToolStripMenuItem1
             // 
             fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            fileToolStripMenuItem1.Size = new Size(224, 26);
+            fileToolStripMenuItem1.Size = new Size(134, 26);
             fileToolStripMenuItem1.Text = "File";
             fileToolStripMenuItem1.Click += fileToolStripMenuItem1_Click;
             // 
             // folderToolStripMenuItem
             // 
             folderToolStripMenuItem.Name = "folderToolStripMenuItem";
-            folderToolStripMenuItem.Size = new Size(224, 26);
+            folderToolStripMenuItem.Size = new Size(134, 26);
             folderToolStripMenuItem.Text = "Folder";
             folderToolStripMenuItem.Click += folderToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(224, 26);
+            exitToolStripMenuItem.Size = new Size(122, 26);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -277,28 +277,28 @@
             // copyToolStripMenuItem
             // 
             copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            copyToolStripMenuItem.Size = new Size(224, 26);
+            copyToolStripMenuItem.Size = new Size(136, 26);
             copyToolStripMenuItem.Text = "Copy";
             copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
             // 
             // cutToolStripMenuItem
             // 
             cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            cutToolStripMenuItem.Size = new Size(224, 26);
+            cutToolStripMenuItem.Size = new Size(136, 26);
             cutToolStripMenuItem.Text = "Cut";
             cutToolStripMenuItem.Click += cutToolStripMenuItem_Click;
             // 
             // pasteToolStripMenuItem
             // 
             pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            pasteToolStripMenuItem.Size = new Size(224, 26);
+            pasteToolStripMenuItem.Size = new Size(136, 26);
             pasteToolStripMenuItem.Text = "Paste";
             pasteToolStripMenuItem.Click += pasteToolStripMenuItem_Click;
             // 
             // deleteToolStripMenuItem
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(224, 26);
+            deleteToolStripMenuItem.Size = new Size(136, 26);
             deleteToolStripMenuItem.Text = "Delete";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
@@ -312,28 +312,28 @@
             // detailToolStripMenuItem
             // 
             detailToolStripMenuItem.Name = "detailToolStripMenuItem";
-            detailToolStripMenuItem.Size = new Size(161, 26);
+            detailToolStripMenuItem.Size = new Size(224, 26);
             detailToolStripMenuItem.Text = "Detail";
             detailToolStripMenuItem.Click += detailToolStripMenuItem_Click;
             // 
             // smallIconToolStripMenuItem
             // 
             smallIconToolStripMenuItem.Name = "smallIconToolStripMenuItem";
-            smallIconToolStripMenuItem.Size = new Size(161, 26);
+            smallIconToolStripMenuItem.Size = new Size(224, 26);
             smallIconToolStripMenuItem.Text = "Small Icon";
             smallIconToolStripMenuItem.Click += smallIconToolStripMenuItem_Click;
             // 
             // largeIconToolStripMenuItem
             // 
             largeIconToolStripMenuItem.Name = "largeIconToolStripMenuItem";
-            largeIconToolStripMenuItem.Size = new Size(161, 26);
+            largeIconToolStripMenuItem.Size = new Size(224, 26);
             largeIconToolStripMenuItem.Text = "Large Icon";
             largeIconToolStripMenuItem.Click += largeIconToolStripMenuItem_Click;
             // 
             // listToolStripMenuItem
             // 
             listToolStripMenuItem.Name = "listToolStripMenuItem";
-            listToolStripMenuItem.Size = new Size(161, 26);
+            listToolStripMenuItem.Size = new Size(224, 26);
             listToolStripMenuItem.Text = "List";
             listToolStripMenuItem.Click += listToolStripMenuItem_Click;
             // 

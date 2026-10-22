@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Microsoft.VisualBasic.FileIO;
 
 
 namespace TH2
@@ -25,6 +26,7 @@ namespace TH2
         List<string> sourcePath = new List<string>();
         bool isCut = false;
 
+        TreeNode currentNode = null;
 
         private bool driveExists(string path)
         {
@@ -33,6 +35,63 @@ namespace TH2
                 if (path == drive.Name) return true;
             }
             return false;
+        }
+        private void CopyDirectory(string sourcePath, string desPath)
+        {
+            DirectoryInfo[] folders;
+            FileInfo[] files;
+
+            DirectoryInfo dir = new DirectoryInfo(sourcePath);
+
+            try
+            {
+                folders = dir.GetDirectories();
+                files = dir.GetFiles();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return;
+            }
+            catch (IOException)
+            {
+                return;
+            }
+
+            foreach (FileInfo file in files)
+            {
+
+            }
+
+            foreach (var folder in folders)
+            {
+                string folderPath = desPath + "/" + folder.Name;
+                DirectoryInfo direct = new DirectoryInfo(folderPath);
+                if (direct.Exists)
+                {
+                    MessageBox.Show("Folder " + folder.Name + " đã tồn tại => Skip");
+                }
+                else
+                {
+                    direct.Create();
+                    CopyDirectory(folder.FullName, folderPath);
+                }
+                
+            }
+            foreach (FileInfo file in files)
+            {
+                string newPath = desPath + "/" + file.Name;
+                if (!File.Exists(newPath))
+                {
+                    file.CopyTo(newPath);
+                }
+                else
+                {
+                    MessageBox.Show("Tên thư mục đã tồn tại");
+                }
+               
+
+            }
+
         }
         public Form2()
         {
@@ -123,6 +182,7 @@ namespace TH2
                     }
                 }
                 treeView1.SelectedNode = node;
+                currentNode = node;
                 node.Expand();
             }
             else if (path == "ThisPC")
@@ -243,6 +303,14 @@ namespace TH2
         private void refresh()
         {
             FindNode(path_back.Peek());
+
+            if (currentNode != null && currentNode.Tag.ToString() != "ThisPC")
+            {
+                currentNode.Nodes.Clear();
+                expandNode(currentNode);
+                currentNode.Expand();
+            }
+
             openItem(path_back.Peek());
         }
         ///////////////////////////////////FORM LOAD/////////////////////////////
@@ -328,11 +396,11 @@ namespace TH2
                     {
                         if (File.Exists(path))
                         {
-                            File.Delete(path);
+                            FileSystem.DeleteFile(path, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
                         }
                         else if (Directory.Exists(path))
                         {
-                            Directory.Delete(path);
+                            FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
                         }
                         listView1.Items.Remove(listView1.SelectedItems[0]);
 
@@ -444,8 +512,7 @@ namespace TH2
             if (newFileName == "")
                 return;
 
-            DirectoryInfo dir = new DirectoryInfo(path_back.Peek());
-            string newPath = dir.FullName + "/" + newFileName;
+            string newPath = path_back.Peek() + "/" + newFileName;
             if (!File.Exists(newPath))
             {
                 File.Create(newPath);
@@ -468,9 +535,9 @@ namespace TH2
             DirectoryInfo dir = new DirectoryInfo(path_back.Peek());
             string newPath = dir.FullName + "/" + newFolderName;
             DirectoryInfo newfolder = new DirectoryInfo(newPath);
-            if (!dir.Exists)
+            if (!newfolder.Exists)
             {
-                dir.Create();
+                newfolder.Create();
             }
             else
             {
@@ -505,9 +572,9 @@ namespace TH2
             if (listView1.SelectedItems.Count == 0)
                 return;
 
-            foreach (var item in listView1.SelectedItems)
+            foreach (ListViewItem item in listView1.SelectedItems)
             {
-                sourcePath.Add(item.ToString());
+                sourcePath.Add(item.Tag.ToString());
             }
             isCut = true;
         }
@@ -557,8 +624,8 @@ namespace TH2
                             if (isCut)
 
                                 Directory.Move(item, desPath);
-                            //else
-                                 //CopyDirectory(item, desPath);
+                            else
+                                CopyDirectory(item, desPath);
                         }
                         else
                         {
