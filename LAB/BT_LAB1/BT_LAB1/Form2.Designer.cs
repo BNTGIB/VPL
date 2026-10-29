@@ -42,15 +42,18 @@
             BNT_find = new Button();
             TB_find = new TextBox();
             DGB_sanpham = new DataGridView();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            LB_dvt = new Label();
-            comboBox_dvt = new ComboBox();
             MaSP = new DataGridViewTextBoxColumn();
             TenSP = new DataGridViewTextBoxColumn();
             DonGia = new DataGridViewTextBoxColumn();
             SL = new DataGridViewTextBoxColumn();
             DVT = new DataGridViewTextBoxColumn();
+            TB_Name = new TextBox();
+            TB_Price = new TextBox();
+            LB_dvt = new Label();
+            comboBox_dvt = new ComboBox();
+            TB_DVT = new TextBox();
+            LB_VND = new Label();
+            LB_getID = new Label();
             ((System.ComponentModel.ISupportInitialize)DGB_sanpham).BeginInit();
             SuspendLayout();
             // 
@@ -58,6 +61,7 @@
             // 
             TB_ID.Location = new Point(116, 71);
             TB_ID.Name = "TB_ID";
+            TB_ID.ReadOnly = true;
             TB_ID.Size = new Size(349, 27);
             TB_ID.TabIndex = 0;
             // 
@@ -65,6 +69,7 @@
             // 
             TB_SL.Location = new Point(116, 116);
             TB_SL.Name = "TB_SL";
+            TB_SL.ReadOnly = true;
             TB_SL.Size = new Size(349, 27);
             TB_SL.TabIndex = 1;
             // 
@@ -160,10 +165,13 @@
             // 
             // TB_find
             // 
+            TB_find.BackColor = SystemColors.Window;
+            TB_find.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TB_find.Location = new Point(385, 214);
             TB_find.Name = "TB_find";
             TB_find.Size = new Size(430, 27);
             TB_find.TabIndex = 13;
+            TB_find.TextChanged += TB_find_TextChanged;
             // 
             // DGB_sanpham
             // 
@@ -189,37 +197,6 @@
             DGB_sanpham.Size = new Size(946, 447);
             DGB_sanpham.TabIndex = 14;
             DGB_sanpham.CellClick += DGB_sanpham_CellClick;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(588, 71);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(370, 27);
-            textBox1.TabIndex = 15;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(588, 113);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(370, 27);
-            textBox2.TabIndex = 16;
-            // 
-            // LB_dvt
-            // 
-            LB_dvt.AutoSize = true;
-            LB_dvt.Location = new Point(27, 163);
-            LB_dvt.Name = "LB_dvt";
-            LB_dvt.Size = new Size(83, 20);
-            LB_dvt.TabIndex = 18;
-            LB_dvt.Text = "Đơn bị tính";
-            // 
-            // comboBox_dvt
-            // 
-            comboBox_dvt.FormattingEnabled = true;
-            comboBox_dvt.Location = new Point(116, 163);
-            comboBox_dvt.Name = "comboBox_dvt";
-            comboBox_dvt.Size = new Size(215, 28);
-            comboBox_dvt.TabIndex = 19;
             // 
             // MaSP
             // 
@@ -266,15 +243,80 @@
             DVT.MinimumWidth = 6;
             DVT.Name = "DVT";
             // 
+            // TB_Name
+            // 
+            TB_Name.Location = new Point(588, 71);
+            TB_Name.Name = "TB_Name";
+            TB_Name.ReadOnly = true;
+            TB_Name.Size = new Size(370, 27);
+            TB_Name.TabIndex = 15;
+            // 
+            // TB_Price
+            // 
+            TB_Price.Location = new Point(588, 113);
+            TB_Price.Name = "TB_Price";
+            TB_Price.ReadOnly = true;
+            TB_Price.Size = new Size(370, 27);
+            TB_Price.TabIndex = 16;
+            // 
+            // LB_dvt
+            // 
+            LB_dvt.AutoSize = true;
+            LB_dvt.Location = new Point(27, 163);
+            LB_dvt.Name = "LB_dvt";
+            LB_dvt.Size = new Size(83, 20);
+            LB_dvt.TabIndex = 18;
+            LB_dvt.Text = "Đơn bị tính";
+            // 
+            // comboBox_dvt
+            // 
+            comboBox_dvt.FormattingEnabled = true;
+            comboBox_dvt.Location = new Point(116, 163);
+            comboBox_dvt.Name = "comboBox_dvt";
+            comboBox_dvt.Size = new Size(215, 28);
+            comboBox_dvt.TabIndex = 19;
+            // 
+            // TB_DVT
+            // 
+            TB_DVT.Location = new Point(116, 164);
+            TB_DVT.Name = "TB_DVT";
+            TB_DVT.ReadOnly = true;
+            TB_DVT.Size = new Size(215, 27);
+            TB_DVT.TabIndex = 20;
+            // 
+            // LB_VND
+            // 
+            LB_VND.AutoSize = true;
+            LB_VND.Font = new Font("Segoe UI", 7.8F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            LB_VND.Location = new Point(923, 118);
+            LB_VND.Name = "LB_VND";
+            LB_VND.Size = new Size(35, 17);
+            LB_VND.TabIndex = 21;
+            LB_VND.Text = "VND";
+            // 
+            // LB_getID
+            // 
+            LB_getID.AutoSize = true;
+            LB_getID.BackColor = SystemColors.Window;
+            LB_getID.Font = new Font("Segoe UI", 7.8F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            LB_getID.Location = new Point(394, 219);
+            LB_getID.Name = "LB_getID";
+            LB_getID.Size = new Size(101, 17);
+            LB_getID.TabIndex = 22;
+            LB_getID.Text = "Nhập ID cần tìm";
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(970, 722);
+            Controls.Add(LB_getID);
+            Controls.Add(LB_VND);
+            Controls.Add(TB_DVT);
             Controls.Add(comboBox_dvt);
             Controls.Add(LB_dvt);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(TB_Price);
+            Controls.Add(TB_Name);
             Controls.Add(DGB_sanpham);
             Controls.Add(TB_find);
             Controls.Add(BNT_find);
@@ -301,8 +343,6 @@
 
         private TextBox TB_ID;
         private TextBox TB_SL;
-        private TextBox TB_Price;
-        private TextBox TB_Name;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -314,8 +354,8 @@
         private Button BNT_find;
         private TextBox TB_find;
         private DataGridView DGB_sanpham;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox TB_Name;
+        private TextBox TB_Price;
         private Label LB_dvt;
         private ComboBox comboBox_dvt;
         private DataGridViewTextBoxColumn MaSP;
@@ -323,5 +363,8 @@
         private DataGridViewTextBoxColumn DonGia;
         private DataGridViewTextBoxColumn SL;
         private DataGridViewTextBoxColumn DVT;
+        private TextBox TB_DVT;
+        private Label LB_VND;
+        private Label LB_getID;
     }
 }

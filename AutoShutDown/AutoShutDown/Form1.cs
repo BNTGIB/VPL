@@ -96,10 +96,6 @@ namespace AutoShutDown
             if (comboBox_action.SelectedIndex == 0) action = "/s /t 0";
             else if (comboBox_action.SelectedIndex == 1) action = "/r /t 0";
 
-            if (seconds > 0)
-            {
-                return;
-            }
 
             Process.Start("shutdown", action);
             timer1.Stop();

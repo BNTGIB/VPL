@@ -20,5 +20,10 @@ namespace BT_LAB1
             SL = sl;
             DVT = dvt;
         }
+
+        public string getMasp()
+        {
+            return MaSP;
+        }
     }
 }

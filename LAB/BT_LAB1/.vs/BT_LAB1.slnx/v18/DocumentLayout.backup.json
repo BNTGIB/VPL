@@ -11,12 +11,12 @@
       "RelativeMoniker": "D:0:0:{D00435D5-4EDB-8594-D438-360241D15460}|BT_LAB1\\BT_LAB1.csproj|solutionrelative:bt_lab1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D00435D5-4EDB-8594-D438-360241D15460}|BT_LAB1\\BT_LAB1.csproj|d:\\c#\\vpl\\lab\\bt_lab1\\bt_lab1\\sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D00435D5-4EDB-8594-D438-360241D15460}|BT_LAB1\\BT_LAB1.csproj|solutionrelative:bt_lab1\\sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D00435D5-4EDB-8594-D438-360241D15460}|BT_LAB1\\BT_LAB1.csproj|d:\\c#\\vpl\\lab\\bt_lab1\\bt_lab1\\form2.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D00435D5-4EDB-8594-D438-360241D15460}|BT_LAB1\\BT_LAB1.csproj|solutionrelative:bt_lab1\\form2.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D00435D5-4EDB-8594-D438-360241D15460}|BT_LAB1\\BT_LAB1.csproj|d:\\c#\\vpl\\lab\\bt_lab1\\bt_lab1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D00435D5-4EDB-8594-D438-360241D15460}|BT_LAB1\\BT_LAB1.csproj|solutionrelative:bt_lab1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D00435D5-4EDB-8594-D438-360241D15460}|BT_LAB1\\BT_LAB1.csproj|d:\\c#\\vpl\\lab\\bt_lab1\\bt_lab1\\sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D00435D5-4EDB-8594-D438-360241D15460}|BT_LAB1\\BT_LAB1.csproj|solutionrelative:bt_lab1\\sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,27 +47,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\C#\\VPL\\LAB\\BT_LAB1\\BT_LAB1\\Form1.cs",
-              "RelativeDocumentMoniker": "BT_LAB1\\Form1.cs",
-              "ToolTip": "D:\\C#\\VPL\\LAB\\BT_LAB1\\BT_LAB1\\Form1.cs",
-              "RelativeToolTip": "BT_LAB1\\Form1.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACIAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-04T05:55:55.999Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "SanPham.cs",
               "DocumentMoniker": "D:\\C#\\VPL\\LAB\\BT_LAB1\\BT_LAB1\\SanPham.cs",
               "RelativeDocumentMoniker": "BT_LAB1\\SanPham.cs",
               "ToolTip": "D:\\C#\\VPL\\LAB\\BT_LAB1\\BT_LAB1\\SanPham.cs",
               "RelativeToolTip": "BT_LAB1\\SanPham.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-16T02:35:21.484Z",
+              "WhenOpened": "2026-10-29T15:24:43.753Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form2.Designer.cs",
+              "DocumentMoniker": "D:\\C#\\VPL\\LAB\\BT_LAB1\\BT_LAB1\\Form2.Designer.cs",
+              "RelativeDocumentMoniker": "BT_LAB1\\Form2.Designer.cs",
+              "ToolTip": "D:\\C#\\VPL\\LAB\\BT_LAB1\\BT_LAB1\\Form2.Designer.cs*",
+              "RelativeToolTip": "BT_LAB1\\Form2.Designer.cs*",
+              "ViewState": "AgIAAAsBAAAAAAAAAAAtwCIBAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-29T14:34:50.893Z",
               "EditorCaption": ""
             },
             {
@@ -90,7 +90,7 @@
               "RelativeDocumentMoniker": "BT_LAB1\\Form2.cs",
               "ToolTip": "D:\\C#\\VPL\\LAB\\BT_LAB1\\BT_LAB1\\Form2.cs*",
               "RelativeToolTip": "BT_LAB1\\Form2.cs*",
-              "ViewState": "AgIAADUAAAAAAAAAAAD4v0IAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAANMAAAAAAAAAAAAawN0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-04T04:38:50.781Z",
               "EditorCaption": ""
