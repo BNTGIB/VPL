@@ -5,9 +5,9 @@ using BT_LAB1;
 namespace BT_LAB1
 {
 
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
-        public Form1()
+        public Login()
         {
             InitializeComponent();
         }
@@ -34,7 +34,7 @@ namespace BT_LAB1
                     {
                         //MessageBox.Show("Đăng nhập thành công!");
                         Hide();
-                        Form2 form2 = new Form2();
+                        Home form2 = new Home();
                         form2.ShowDialog();
                         Show();
                     }

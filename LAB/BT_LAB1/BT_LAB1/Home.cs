@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace BT_LAB1
 {
-    public partial class Form2 : Form
+    public partial class Home : Form
     {
         List<SanPham> listSp = new List<SanPham>()
         {
@@ -68,7 +68,7 @@ namespace BT_LAB1
             DGB_sanpham.DataSource = null;
             DGB_sanpham.DataSource = listSp;
         }
-        public Form2()
+        public Home()
         {
             InitializeComponent();
         }
