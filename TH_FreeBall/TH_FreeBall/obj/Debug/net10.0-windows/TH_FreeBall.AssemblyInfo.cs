@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TH_FreeBall")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17b99c48bcd502e8db30d56da53661993cc40287")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4118118a6a7f2a91487f48b353d043cd7fab489")]
 [assembly: System.Reflection.AssemblyProductAttribute("TH_FreeBall")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TH_FreeBall")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

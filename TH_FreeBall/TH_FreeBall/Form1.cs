@@ -1,8 +1,10 @@
 using System;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace TH_FreeBall
 {
@@ -10,6 +12,9 @@ namespace TH_FreeBall
     {
         List<Ball> balls = new List<Ball>();
         List<bool> enable = new List<bool>();
+        List<Effect_Explosive> eff_ex = new List<Effect_Explosive>();
+
+        Image effect_explosive_image;
 
 
         Random rand = new Random();
@@ -47,16 +52,13 @@ namespace TH_FreeBall
         {
             timer1.Interval = 16;
             timer1.Start();
+            effect_explosive_image = Image.FromFile("explosive_effect.png");
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics b = e.Graphics;
-            //foreach (Ball ball in balls)
-            //{
-            //    SolidBrush brush = new SolidBrush(ball.color);
-            //    b.FillEllipse(brush, (int)ball.x, (int)ball.y, (int)ball.d, (int)ball.d);
-            //}
+
             for (int i = 0; i < balls.Count; i++)
             {
                 if (enable[i])
@@ -65,14 +67,26 @@ namespace TH_FreeBall
                     b.FillEllipse(brush, (int)balls[i].x, (int)balls[i].y, (int)balls[i].d, (int)balls[i].d);
                 }
             }
+            foreach (Effect_Explosive ef in eff_ex)
+            {
+                if (ef.frame > 0)
+                {
+                    b.DrawImage(effect_explosive_image, (int)ef.x, (int)ef.y, (int)ef.d, (int)ef.d);
+
+                    ef.frame--;
+                    ef.d += 20;
+                    ef.x-=10;
+                    ef.y-=10;
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {          
-
+            List<Ball> new_balls = new List<Ball>();
             for (int i = 0; i < balls.Count(); i++)
             {
-                for (int j = 0; j < balls.Count() && balls.Count() > 1; j++)
+                for (int j = i+1 ; j < balls.Count() && balls.Count() > 1; j++)
                 {
                     if (j == i || !enable[i] || !enable[j])
                         continue;
@@ -81,7 +95,16 @@ namespace TH_FreeBall
                     {
                         enable[i] = false;
                         enable[j] = false;
+
+                        eff_ex.Add(new Effect_Explosive((balls[i].x + balls[j].x) / 2, 
+                                                        (balls[i].y + balls[j].y) / 2));
                     }
+
+
+                }
+                if (enable[i])
+                {
+                    new_balls.Add(balls[i]);
                 }
             }
 
@@ -103,6 +126,19 @@ namespace TH_FreeBall
                     balls[i].y = balls[i].formHeight -balls[i].d;
                 }
             }
+            int alive = 0;
+            for (int i = 0; i < eff_ex.Count(); i++)
+            {
+                if (eff_ex[i].frame > 0)
+                {
+                    eff_ex[alive] = eff_ex[i];
+                    alive++;
+                }
+            }
+            eff_ex.RemoveRange(alive, eff_ex.Count() - alive);
+
+            balls = new_balls;
+            enable = Enumerable.Repeat(true, balls.Count()).ToList();
             Invalidate();
         }
 

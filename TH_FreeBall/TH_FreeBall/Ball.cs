@@ -16,7 +16,7 @@ namespace TH_FreeBall
         
         public Color color;
 
-        public Ball(int x = 1, int y = 1, int d = 50, int fW=200, int fH=200, int xs = 2, int ys = 2)
+        public Ball(double x = 1, double y = 1, double d = 50, int fW=200, int fH=200, double xs = 2, double ys = 2)
         { 
             this.x= x;
             this.y= y;
