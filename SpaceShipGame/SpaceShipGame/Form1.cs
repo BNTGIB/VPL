@@ -15,14 +15,14 @@ namespace SpaceShipGame
         List<Metero> meteros = new List<Metero>();
         List<bool> enable_metero = new List<bool>();
         int time_metero = 0;
-
-        //Image[] metero_frame;
-        //Bitmap bg;
+        int sub_time = 0;
 
         //Space Ship
 
         Ship Ship1;
         Image ship1_image;
+
+        Image ship1_HP_image;
 
         //Fire
         List<Fire> fires = new List<Fire>();
@@ -36,6 +36,7 @@ namespace SpaceShipGame
         Image[] explosive_images = new Image[9];
 
         Random rand = new Random();
+        int time_level = 0;
         public double g = 0.3;
         public Form1()
         {
@@ -49,6 +50,8 @@ namespace SpaceShipGame
             ship1_image = Image.FromFile("Img\\SpaceShip\\spaceships\\SpaceShips\\Ship_2.png");
 
             fire_image = Image.FromFile("Img\\SpaceShip\\firemeo.png");
+
+            ship1_HP_image = Image.FromFile("Img\\Element\\Hp1.png");
 
             for (int i = 0; i < 9; i++)
             {
@@ -76,6 +79,9 @@ namespace SpaceShipGame
             {
                 b.DrawImage(explosive_images[(8 - ef.frame)%9], ef.x, ef.y, 100, 100);
             }
+
+            b.FillRectangle(Brushes.Red, 60, 30, 225*Ship1.HP/100, 10 );
+            b.DrawImage(ship1_HP_image, 6,20);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -95,13 +101,13 @@ namespace SpaceShipGame
                     enable_fire[i] = false;
                 }
             }
-
-            
-
             //Metero
             time_metero++;
+            time_level++;
+            sub_time = ((40 - ((time_level / 60) / 3)+40)) % 41 + 1; 
+            sub_time = sub_time < 15 ? 15 : sub_time;
             time_metero %= 120;
-            if (time_metero % 20 == 0)
+            if (time_metero % sub_time== 0)
             {
                 meteros.Add(new Metero(this.ClientSize.Width, this.ClientSize.Height));
                 enable_metero.Add(true);
@@ -143,6 +149,17 @@ namespace SpaceShipGame
                         explosive_effects.Add(new Explosive_effect(eff_x, eff_y));
                     }
                 }
+
+                if (meteros[i].conclision_Ship(Ship1))
+                {
+                    enable_metero[i] = false;
+                    int eff_x = meteros[i].x + meteros[i].d / 2 - 50,
+                            eff_y = meteros[i].y + meteros[i].d / 2 - 50;
+                    explosive_effects.Add(new Explosive_effect(eff_x, eff_y));
+
+                    if(Ship1.HP > 0)
+                        Ship1.HP -= 10;
+                }
             }
 
             //Update Metero/Fire List
@@ -172,7 +189,7 @@ namespace SpaceShipGame
 
 
 
-            this.Text = $"Meteros: {meteros.Count} | t={time_metero} | {Ship1.x_speed} | {Ship1.y_speed}";
+            this.Text = $"Meteros: {meteros.Count} | t={time_metero} | {Ship1.x_speed} | {Ship1.y_speed} | Sub_time= {sub_time} | Time Sec = {time_level/60}";
             Invalidate();
         }
 
@@ -195,7 +212,7 @@ namespace SpaceShipGame
                 case Keys.Space:
                     if (fire_countDown == 0)
                     {
-                        fire_countDown = 10;
+                        fire_countDown = 7;
                         fires.Add(new Fire(Ship1.x + 14, Ship1.y));
                         enable_fire.Add(true);
                     }

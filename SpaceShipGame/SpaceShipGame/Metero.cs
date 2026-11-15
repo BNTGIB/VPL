@@ -42,6 +42,11 @@ namespace SpaceShipGame
         {
             return ((fire.x >= (x - 5) && fire.x < (x + d)) && (fire.y > y && fire.y < (y + d - 10)));
         }
+
+        public bool conclision_Ship(Ship ship)
+        {
+            return ((ship.x >= (x - 5) && ship.x < (x + d)) && (ship.y > y && ship.y < (y + d - 10)));
+        }
     }
 
 }

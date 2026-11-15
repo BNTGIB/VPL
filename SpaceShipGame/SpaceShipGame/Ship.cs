@@ -9,6 +9,8 @@ namespace SpaceShipGame
         public int x, y;
         public int x_speed, y_speed, x_left, x_right, y_up, y_down;
 
+        public int HP;
+
         public int FormWidth, FormHeight;
         public Ship(int FW = 800, int FH = 800)
         {
@@ -20,6 +22,7 @@ namespace SpaceShipGame
             y_speed = 0;
             x_left = x_right = 0;
             y_up = y_down = 0;
+            HP = 100;
         }
 
         public void move()
