@@ -11,6 +11,8 @@ namespace SpaceShipGame
         public int formWidth, formHeight, frame;
         public int y_speed, d = 64;
 
+        public bool IsAlive = true;
+
         public Metero(int fW = 200, int fH = 200)
         {
             this.formWidth = fW;

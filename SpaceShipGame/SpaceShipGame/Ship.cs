@@ -12,9 +12,9 @@ namespace SpaceShipGame
         public int HP, Energy, count_Down, Score;
 
         public int FormWidth, FormHeight;
-        public Ship(int FW = 800, int FH = 800)
+        public Ship(int FW = 800, int FH = 800, int x_spawn = 0)
         {
-            this.x = FW/2;
+            this.x = FW/2 - x_spawn;
             this.y = FH - 100;
             this.FormWidth = FW;
             this.FormHeight = FH;

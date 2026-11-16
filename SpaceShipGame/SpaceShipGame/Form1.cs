@@ -13,21 +13,25 @@ namespace SpaceShipGame
     {
         //METERO
         List<Metero> meteros = new List<Metero>();
-        List<bool> enable_metero = new List<bool>();
         int time_metero = 0;
         int sub_time = 0;
 
-        //Space Ship
+        //Space Ship-----------------
+        Font ship_Energy_font;
+        Font ship_Score_font;
+        //Ship 1
         Ship Ship1;
         Image ship1_image;
         Image ship1_HP_image;
-        Font ship_Energy_font;
-        Font ship_Score_font;
+
+        //Ship2
+        Ship Ship2;
+        Image ship2_image;
+        Image ship2_HP_image;
 
 
         //Fire
         List<Fire> fires = new List<Fire>();
-        List<bool> enable_fire = new List<bool>();
         Image fire_image;
 
         //Effect_Explosive
@@ -52,17 +56,20 @@ namespace SpaceShipGame
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Ship1 = new Ship(this.ClientSize.Width, this.ClientSize.Height);
-            ship1_image = Image.FromFile("Img\\SpaceShip\\spaceships\\SpaceShips\\Ship_2.png");
-
-            fire_image = Image.FromFile("Img\\SpaceShip\\firemeo.png");
-
+            //Ship 1
+            Ship1 = new Ship(this.ClientSize.Width, this.ClientSize.Height, 100);
+            ship1_image = Image.FromFile("Img\\SpaceShip\\spaceships\\SpaceShips\\Ship_1.png");
             ship1_HP_image = Image.FromFile("Img\\Element\\Hp1.png");
+            //Ship 2
+            Ship2 = new Ship(this.ClientSize.Width, this.ClientSize.Height, -100);
+            ship2_image = Image.FromFile("Img\\SpaceShip\\spaceships\\SpaceShips\\Ship_2.png");
+            ship2_HP_image = Image.FromFile("Img\\Element\\Hp2.png");
+
 
             ship_Energy_font = new Font("Upheaval TT (BRK)", 13, FontStyle.Bold);
             ship_Score_font = new Font("Upheaval TT (BRK)", 20, FontStyle.Bold);
 
-
+            fire_image = Image.FromFile("Img\\SpaceShip\\firemeo.png");
             energy_image = Image.FromFile("Img\\Element\\energy.png");
 
             for (int i = 0; i < 9; i++)
@@ -82,6 +89,7 @@ namespace SpaceShipGame
             Graphics b = e.Graphics;
 
             b.DrawImage(ship1_image, Ship1.x, Ship1.y);
+            b.DrawImage(ship2_image, Ship2.x, Ship2.y);
 
             foreach (Fire fire in fires)
             {
@@ -102,10 +110,16 @@ namespace SpaceShipGame
                 b.DrawEllipse(Pens.Yellow, en.x - 3, en.y - 3, 36, 36);
             }
 
+            //Ship 1 element
             b.FillRectangle(Brushes.Red, 60, 30, 225 * Ship1.HP / 100, 10);
             b.DrawImage(ship1_HP_image, 6, 20);
             b.DrawString("ENGERGY: " + Ship1.Energy.ToString(), ship_Energy_font, Brushes.White, 55, 50);
             b.DrawString("SCORE: " + Ship1.Score.ToString(), ship_Score_font, Brushes.Yellow, 10, this.ClientSize.Height - 40);
+            //Ship 2 element
+            b.FillRectangle(Brushes.Red, 505 + 225 - (225 * Ship2.HP / 100), 30, 225 * Ship2.HP / 100, 10);
+            b.DrawImage(ship2_HP_image, 500, 20);
+            b.DrawString("ENGERGY: " + Ship2.Energy.ToString(), ship_Energy_font, Brushes.White, 585, 50);
+            b.DrawString("SCORE: " + Ship2.Score.ToString(), ship_Score_font, Brushes.Yellow, 600, this.ClientSize.Height - 40);
 
             if (IsOver)
             {
@@ -118,17 +132,21 @@ namespace SpaceShipGame
         {
             //Ship
             Ship1.move();
+            Ship2.move();
 
             //Fire
             if (Ship1.count_Down > 0)
                 Ship1.count_Down--;
 
-            for (int i = 0; i < fires.Count; i++)
+            if (Ship2.count_Down > 0)
+                Ship2.count_Down--;
+
+            foreach (Fire fire in fires)
             {
-                fires[i].Move();
-                if (fires[i].IsDead())
+                fire.Move();
+                if (fire.IsDead())
                 {
-                    enable_fire[i] = false;
+                    fire.IsAlive = false;
                 }
             }
             //Metero
@@ -140,81 +158,53 @@ namespace SpaceShipGame
             if (time_metero % sub_time == 0)
             {
                 meteros.Add(new Metero(this.ClientSize.Width, this.ClientSize.Height));
-                enable_metero.Add(true);
             }
 
-            for (int i = 0; i < meteros.Count; i++)
+            foreach (Metero metero in meteros)
             {
-                meteros[i].move();
-                if (meteros[i].IsDead())
-                    enable_metero[i] = false;
+                metero.move();
+                if (metero.IsDead())
+                    metero.IsAlive = false;
             }
 
             //Explosive Effect
-            int Explosive_eff_dead = 0;
-            for (int i = 0; i < explosive_effects.Count; i++)
+            foreach (Explosive_effect explosive in explosive_effects)
             {
-                if (explosive_effects[i].IsDead())
+                if (explosive.IsDead())
                 {
-                    Explosive_eff_dead++;
+                    explosive.IsAlive = false;
                 }
 
-                if (explosive_effects[i].frame > 0)
-                    explosive_effects[i].frame--;
+                if (explosive.frame > 0)
+                    explosive.frame--;
             }
-            explosive_effects.RemoveRange(0, Explosive_eff_dead);
 
 
             //Conclision Metero
-            for (int i = 0; i < meteros.Count; i++)
+            foreach (Metero metero in meteros)
             {
-                for (int j = 0; j < fires.Count; j++)
+                foreach (Fire fire in fires)
                 {
-                    if (meteros[i].conclision_fire(fires[j]))
+                    if (metero.conclision_fire(fire))
                     {
-                        enable_metero[i] = false;
-                        enable_fire[j] = false;
-                        int eff_x = meteros[i].x + meteros[i].d / 2 - 50,
-                            eff_y = meteros[i].y + meteros[i].d / 2 - 50;
+                        metero.IsAlive = false;
+                        fire.IsAlive = false;
+                        int eff_x = metero.x + metero.d / 2 - 50,
+                            eff_y = metero.y + metero.d / 2 - 50;
                         explosive_effects.Add(new Explosive_effect(eff_x, eff_y));
                         Ship1.Score += 7 + rand.Next(8);
                     }
                 }
 
-                if (meteros[i].conclision_Ship(Ship1))
+                if (metero.conclision_Ship(Ship1))
                 {
-                    enable_metero[i] = false;
-                    int eff_x = meteros[i].x + meteros[i].d / 2 - 50,
-                            eff_y = meteros[i].y + meteros[i].d / 2 - 50;
+                    metero.IsAlive = false;
+                    int eff_x = metero.x + metero.d / 2 - 50,
+                            eff_y = metero.y + metero.d / 2 - 50;
                     explosive_effects.Add(new Explosive_effect(eff_x, eff_y));
                     Ship1.HP -= 10;
                 }
             }
-
-            //Update Metero/Fire List
-            int fire_alive = 0;
-            for (int i = 0; i < fires.Count; i++)
-            {
-                if (enable_fire[i])
-                {
-                    fires[fire_alive] = fires[i];
-                    fire_alive++;
-                }
-            }
-            fires.RemoveRange(fire_alive, fires.Count() - fire_alive);
-            enable_fire = Enumerable.Repeat(true, fires.Count()).ToList();
-
-            int metero_alive = 0;
-            for (int i = 0; i < meteros.Count; i++)
-            {
-                if (enable_metero[i])
-                {
-                    meteros[metero_alive] = meteros[i];
-                    metero_alive++;
-                }
-            }
-            meteros.RemoveRange(metero_alive, meteros.Count() - metero_alive);
-            enable_metero = Enumerable.Repeat(true, meteros.Count()).ToList();
 
 
             //Energy_Spawn
@@ -226,7 +216,14 @@ namespace SpaceShipGame
                     energies[i].isAlive = false;
                 }
             }
+
+            //Update
+
+            fires.RemoveAll(f => f.IsAlive == false);
+            meteros.RemoveAll(m => m.IsAlive == false);
             energies.RemoveAll(en => en.isAlive == false);
+            explosive_effects.RemoveAll(ef => ef.IsAlive == false);
+
 
             //Is Over
             if (Ship1.HP <= 0 || Ship1.Score >= 500)
@@ -277,8 +274,28 @@ namespace SpaceShipGame
                     {
                         Ship1.count_Down = 7;
                         fires.Add(new Fire(Ship1.x + 14, Ship1.y));
-                        enable_fire.Add(true);
                         Ship1.Energy--;
+                    }
+                    break;
+
+                case Keys.Left:
+                    Ship2.x_left = 5;
+                    break;
+                case Keys.Right:
+                    Ship2.x_right = 5;
+                    break;
+                case Keys.Up:
+                    Ship2.y_up = 5;
+                    break;
+                case Keys.Down:
+                    Ship2.y_down = 5;
+                    break;
+                case Keys.Enter:
+                    if (Ship2.count_Down == 0 && Ship2.Energy > 0)
+                    {
+                        Ship2.count_Down = 7;
+                        fires.Add(new Fire(Ship2.x + 14, Ship2.y));
+                        Ship2.Energy--;
                     }
 
                     break;
@@ -300,6 +317,19 @@ namespace SpaceShipGame
                     break;
                 case Keys.S:
                     Ship1.y_down = 0;
+                    break;
+
+                case Keys.Left:
+                    Ship2.x_left = 0;
+                    break;
+                case Keys.Right:
+                    Ship2.x_right = 0;
+                    break;
+                case Keys.Up:
+                    Ship2.y_up = 0;
+                    break;
+                case Keys.Down:
+                    Ship2.y_down = 0;
                     break;
             }
         }
