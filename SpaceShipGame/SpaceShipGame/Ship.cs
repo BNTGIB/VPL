@@ -9,7 +9,7 @@ namespace SpaceShipGame
         public int x, y;
         public int x_speed, y_speed, x_left, x_right, y_up, y_down;
 
-        public int HP;
+        public int HP, Energy, count_Down, Score;
 
         public int FormWidth, FormHeight;
         public Ship(int FW = 800, int FH = 800)
@@ -23,6 +23,9 @@ namespace SpaceShipGame
             x_left = x_right = 0;
             y_up = y_down = 0;
             HP = 100;
+            Energy = 20;
+            count_Down = 0;
+            Score = 0;
         }
 
         public void move()

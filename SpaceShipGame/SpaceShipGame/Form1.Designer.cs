@@ -31,11 +31,16 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             timer1 = new System.Windows.Forms.Timer(components);
+            timer2 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // timer1
             // 
             timer1.Tick += timer1_Tick;
+            // 
+            // timer2
+            // 
+            timer2.Tick += timer2_Tick;
             // 
             // Form1
             // 
@@ -43,7 +48,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(782, 753);
+            ClientSize = new Size(792, 763);
             MaximizeBox = false;
             MaximumSize = new Size(800, 800);
             MinimumSize = new Size(800, 800);
@@ -60,5 +65,6 @@
         #endregion
 
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
     }
 }

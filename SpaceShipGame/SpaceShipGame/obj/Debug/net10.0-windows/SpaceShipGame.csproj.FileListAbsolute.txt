@@ -73,4 +73,5 @@ D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\SpaceShip\sp
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\SpaceShip\spaceships\SpaceShips\SpaceShips.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\Element\Hp1.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\Element\Hp2.png
-D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\Element\Hp1 (1).png
+D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\Element\energy.png
+D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\GameOver\gameover.png
