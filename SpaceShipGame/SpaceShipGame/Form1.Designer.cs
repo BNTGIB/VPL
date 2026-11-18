@@ -59,6 +59,9 @@
             Paint += Form1_Paint;
             KeyDown += Form1_KeyDown;
             KeyUp += Form1_KeyUp;
+            MouseDown += Form1_MouseDown;
+            MouseMove += Form1_MouseMove;
+            MouseUp += Form1_MouseUp;
             ResumeLayout(false);
         }
 

@@ -32,7 +32,9 @@ namespace SpaceShipGame
 
         //Fire
         List<Fire> fires = new List<Fire>();
-        Image fire_image;
+        Image fire1_image;
+        Image fire2_image;
+
 
         //Effect_Explosive
         List<Explosive_effect> explosive_effects = new List<Explosive_effect>();
@@ -45,8 +47,11 @@ namespace SpaceShipGame
 
         //System
         Random rand = new Random();
+        bool IsNotRunning = true;
         int time_level = 0;
         bool IsOver = false;
+        bool Ship1Win = false;
+        Button PlayButton;
 
         public Form1()
         {
@@ -57,7 +62,7 @@ namespace SpaceShipGame
         private void Form1_Load(object sender, EventArgs e)
         {
             //Ship 1
-            Ship1 = new Ship(this.ClientSize.Width, this.ClientSize.Height, 100);
+            Ship1 = new Ship(this.ClientSize.Width, this.ClientSize.Height, 132);
             ship1_image = Image.FromFile("Img\\SpaceShip\\spaceships\\SpaceShips\\Ship_1.png");
             ship1_HP_image = Image.FromFile("Img\\Element\\Hp1.png");
             //Ship 2
@@ -65,23 +70,31 @@ namespace SpaceShipGame
             ship2_image = Image.FromFile("Img\\SpaceShip\\spaceships\\SpaceShips\\Ship_2.png");
             ship2_HP_image = Image.FromFile("Img\\Element\\Hp2.png");
 
-
             ship_Energy_font = new Font("Upheaval TT (BRK)", 13, FontStyle.Bold);
             ship_Score_font = new Font("Upheaval TT (BRK)", 20, FontStyle.Bold);
 
-            fire_image = Image.FromFile("Img\\SpaceShip\\firemeo.png");
+            //Fire
+            fire1_image = Image.FromFile("Img\\SpaceShip\\firemeo1.png");
+            fire2_image = Image.FromFile("Img\\SpaceShip\\firemeo2.png");
+            //Energy
             energy_image = Image.FromFile("Img\\Element\\energy.png");
-
+            //Effect
             for (int i = 0; i < 9; i++)
             {
                 explosive_images[i] = Image.FromFile("Img\\Effect_Explosive\\" + (i + 1).ToString() + ".png");
             }
+
+            //System
+            PlayButton = new Button(this.ClientSize.Width / 2 - 118, this.ClientSize.Height / 2 - 35);
+            PlayButton.buttom_image.Add(Image.FromFile("Img\\System\\playbt1.png"));
+            PlayButton.buttom_image.Add(Image.FromFile("Img\\System\\playbt2.png"));
+            PlayButton.buttom_image.Add(Image.FromFile("Img\\System\\playbt3.png"));
+
             timer1.Interval = 16;
             timer2.Interval = 500;
 
-            timer1.Start(); ;
+            timer1.Start();
             timer2.Start();
-
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -91,9 +104,15 @@ namespace SpaceShipGame
             b.DrawImage(ship1_image, Ship1.x, Ship1.y);
             b.DrawImage(ship2_image, Ship2.x, Ship2.y);
 
+            if (IsNotRunning)
+            {
+                b.DrawImage(PlayButton.buttom_image[PlayButton.frame_index], this.ClientSize.Width/2 - 118, this.ClientSize.Height/2 - 35);
+                return;
+            }
+
             foreach (Fire fire in fires)
             {
-                b.DrawImage(fire_image, fire.x, fire.y);
+                b.DrawImage(fire.FromShip == 1 ? fire1_image : fire2_image, fire.x, fire.y);
             }
             foreach (Metero metero in meteros)
             {
@@ -124,12 +143,18 @@ namespace SpaceShipGame
             if (IsOver)
             {
                 b.FillRectangle(Brushes.White, this.ClientSize.Width / 2 - 205, this.ClientSize.Height / 2 - 20, 410, 82);
-                b.DrawImage(Image.FromFile("Img\\GameOver\\gameover.png"), this.ClientSize.Width/2 - 200, this.ClientSize.Height/2-180, 400, 250);
+                b.DrawImage(Image.FromFile("Img\\GameOver\\gameover.png"), this.ClientSize.Width / 2 - 200, this.ClientSize.Height / 2 - 180, 400, 250);
+                b.DrawString("PLAYER " + (Ship1Win ? "1" : "2") + " WIN !!", ship_Score_font, Ship1Win ? Brushes.DeepSkyBlue : Brushes.OrangeRed, this.ClientSize.Width / 2 - 135, this.ClientSize.Height / 2 + 80);
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (IsNotRunning)
+            {
+                Invalidate();
+                return;
+            }
             //Ship
             Ship1.move();
             Ship2.move();
@@ -192,7 +217,11 @@ namespace SpaceShipGame
                         int eff_x = metero.x + metero.d / 2 - 50,
                             eff_y = metero.y + metero.d / 2 - 50;
                         explosive_effects.Add(new Explosive_effect(eff_x, eff_y));
-                        Ship1.Score += 7 + rand.Next(8);
+
+                        if (fire.FromShip == 1)
+                            Ship1.Score += 7 + rand.Next(8);
+                        else
+                            Ship2.Score += 7 + rand.Next(8);
                     }
                 }
 
@@ -203,6 +232,15 @@ namespace SpaceShipGame
                             eff_y = metero.y + metero.d / 2 - 50;
                     explosive_effects.Add(new Explosive_effect(eff_x, eff_y));
                     Ship1.HP -= 10;
+                }
+
+                if (metero.conclision_Ship(Ship2))
+                {
+                    metero.IsAlive = false;
+                    int eff_x = metero.x + metero.d / 2 - 50,
+                            eff_y = metero.y + metero.d / 2 - 50;
+                    explosive_effects.Add(new Explosive_effect(eff_x, eff_y));
+                    Ship2.HP -= 10;
                 }
             }
 
@@ -215,6 +253,12 @@ namespace SpaceShipGame
                     Ship1.Energy += 3;
                     energies[i].isAlive = false;
                 }
+                if (energies[i].conclision_Ship(Ship2) && energies[i].isAlive)
+                {
+                    Ship2.Energy += 3;
+                    energies[i].isAlive = false;
+                }
+
             }
 
             //Update
@@ -226,19 +270,29 @@ namespace SpaceShipGame
 
 
             //Is Over
-            if (Ship1.HP <= 0 || Ship1.Score >= 500)
+            if (Ship1.HP <= 0 || Ship1.Score >= 500 || Ship2.HP <= 0 || Ship2.Score >= 500)
             {
                 timer2.Stop();
                 timer1.Stop();
                 IsOver = true;
-            }                
-           
+                if (Ship1.Score >= 500 || Ship2.HP <= 0)
+                {
+                    Ship1Win = true;
+                }
+
+            }
+
             this.Text = $"Meteros: {meteros.Count} | t={time_metero} | {Ship1.x_speed} | {Ship1.y_speed} | Sub_time= {sub_time} | Time Sec = {time_level / 60}";
             Invalidate();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            if (IsNotRunning)
+            {
+                return;
+            }
+
             SpawnEnergy++;
             if (SpawnEnergy == 6)
             {
@@ -250,11 +304,16 @@ namespace SpaceShipGame
             {
                 energy.frame = energy.frame == 0 ? 1 : 0;
             }
-            
+
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if (IsNotRunning)
+            {
+                return;
+            }
+
             switch (e.KeyCode)
             {
                 case Keys.A:
@@ -273,7 +332,7 @@ namespace SpaceShipGame
                     if (Ship1.count_Down == 0 && Ship1.Energy > 0)
                     {
                         Ship1.count_Down = 7;
-                        fires.Add(new Fire(Ship1.x + 14, Ship1.y));
+                        fires.Add(new Fire(Ship1.x + 14, Ship1.y, 1));
                         Ship1.Energy--;
                     }
                     break;
@@ -294,7 +353,7 @@ namespace SpaceShipGame
                     if (Ship2.count_Down == 0 && Ship2.Energy > 0)
                     {
                         Ship2.count_Down = 7;
-                        fires.Add(new Fire(Ship2.x + 14, Ship2.y));
+                        fires.Add(new Fire(Ship2.x + 14, Ship2.y, 2));
                         Ship2.Energy--;
                     }
 
@@ -304,6 +363,10 @@ namespace SpaceShipGame
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
+            if (IsNotRunning)
+            {
+                return;
+            }
             switch (e.KeyCode)
             {
                 case Keys.A:
@@ -334,6 +397,47 @@ namespace SpaceShipGame
             }
         }
 
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!IsNotRunning)
+            {
+                return;
+            }
+            if (PlayButton.checkMouse(e.X, e.Y))
+            {
+                PlayButton.IsClicked = true;
+                PlayButton.frame_index = 2;
+            }
+        }
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!IsNotRunning)
+            {
+                return;
+            }
+            if (PlayButton.checkMouse(e.X, e.Y))
+            {
+                PlayButton.frame_index = PlayButton.IsClicked ? 2 : 1;
+            }
+            else
+            {
+                PlayButton.frame_index = 0;
+                PlayButton.IsClicked = false;
+            }
+        }
         
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!IsNotRunning)
+            {
+                return;
+            }
+            PlayButton.IsClicked = false;
+            if (PlayButton.checkMouse(e.X, e.Y))
+            {
+                IsNotRunning = false;
+                
+            }
+        }
     }
 }

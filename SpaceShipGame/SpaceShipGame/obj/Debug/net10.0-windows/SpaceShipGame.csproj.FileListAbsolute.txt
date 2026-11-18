@@ -64,7 +64,6 @@ D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\metero\7.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\metero\8.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\metero\9.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\metero\metero.png
-D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\SpaceShip\firemeo.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\SpaceShip\spaceships\SpaceShips\Ship_1.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\SpaceShip\spaceships\SpaceShips\Ship_2.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\SpaceShip\spaceships\SpaceShips\Ship_3.png
@@ -75,3 +74,8 @@ D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\Element\Hp1.
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\Element\Hp2.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\Element\energy.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\GameOver\gameover.png
+D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\SpaceShip\firemeo1.png
+D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\SpaceShip\firemeo2.png
+D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\System\playbt2.png
+D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\System\playbt3.png
+D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\System\playbt1.png

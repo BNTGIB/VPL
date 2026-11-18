@@ -12,13 +12,15 @@ namespace SpaceShipGame
         public int speed;
 
         public bool IsAlive;
+        public int FromShip;
 
-        public Fire(int x, int y)
+        public Fire(int x, int y, int fromShip)
         {
             this.x = x;
             this.y = y;
             speed = 10;
             IsAlive = true;
+            FromShip = fromShip;
         }
 
         public void Move()
