@@ -46,12 +46,15 @@ namespace SpaceShipGame
         int SpawnEnergy = 0;
 
         //System
+        int mouseX, mouseY;
         Random rand = new Random();
         bool IsNotRunning = true;
-        int time_level = 0;
+        bool IsBegin = true;
         bool IsOver = false;
         bool Ship1Win = false;
+        int time_level = 0;
         Button PlayButton;
+        Button RestarButton;
 
         public Form1()
         {
@@ -90,6 +93,10 @@ namespace SpaceShipGame
             PlayButton.buttom_image.Add(Image.FromFile("Img\\System\\playbt2.png"));
             PlayButton.buttom_image.Add(Image.FromFile("Img\\System\\playbt3.png"));
 
+            RestarButton = new Button(this.ClientSize.Width / 2 - 35, this.ClientSize.Height / 2 + 200);
+            RestarButton.buttom_image.Add(Image.FromFile("Img\\System\\restartbt.png"));
+            RestarButton.buttom_image.Add(Image.FromFile("Img\\System\\restartbt2.png"));
+
             timer1.Interval = 16;
             timer2.Interval = 500;
 
@@ -104,9 +111,11 @@ namespace SpaceShipGame
             b.DrawImage(ship1_image, Ship1.x, Ship1.y);
             b.DrawImage(ship2_image, Ship2.x, Ship2.y);
 
-            if (IsNotRunning)
+            if (IsNotRunning && IsBegin)
             {
-                b.DrawImage(PlayButton.buttom_image[PlayButton.frame_index], this.ClientSize.Width/2 - 118, this.ClientSize.Height/2 - 35);
+                b.DrawImage(PlayButton.buttom_image[PlayButton.frame_index], PlayButton.x, PlayButton.y);
+                b.DrawString("Player 1", ship_Energy_font, Brushes.DeepSkyBlue, 225, 615);
+                b.DrawString("Player 2", ship_Energy_font, Brushes.OrangeRed, 450, 615);
                 return;
             }
 
@@ -145,6 +154,8 @@ namespace SpaceShipGame
                 b.FillRectangle(Brushes.White, this.ClientSize.Width / 2 - 205, this.ClientSize.Height / 2 - 20, 410, 82);
                 b.DrawImage(Image.FromFile("Img\\GameOver\\gameover.png"), this.ClientSize.Width / 2 - 200, this.ClientSize.Height / 2 - 180, 400, 250);
                 b.DrawString("PLAYER " + (Ship1Win ? "1" : "2") + " WIN !!", ship_Score_font, Ship1Win ? Brushes.DeepSkyBlue : Brushes.OrangeRed, this.ClientSize.Width / 2 - 135, this.ClientSize.Height / 2 + 80);
+
+                b.DrawImage(RestarButton.buttom_image[RestarButton.frame_index], RestarButton.x, RestarButton.y, RestarButton.GetSize().Width, RestarButton.GetSize().Height);
             }
         }
 
@@ -153,6 +164,7 @@ namespace SpaceShipGame
             if (IsNotRunning)
             {
                 Invalidate();
+                this.Text = $"Meteros: {meteros.Count} | t={time_metero} | {Ship1.x_speed} | {Ship1.y_speed} | Sub_time= {sub_time} | Time Sec = {time_level / 60} - Mouse: {mouseX} |  {mouseY} ";
                 return;
             }
             //Ship
@@ -272,9 +284,8 @@ namespace SpaceShipGame
             //Is Over
             if (Ship1.HP <= 0 || Ship1.Score >= 500 || Ship2.HP <= 0 || Ship2.Score >= 500)
             {
-                timer2.Stop();
-                timer1.Stop();
                 IsOver = true;
+                IsNotRunning = true;
                 if (Ship1.Score >= 500 || Ship2.HP <= 0)
                 {
                     Ship1Win = true;
@@ -282,7 +293,7 @@ namespace SpaceShipGame
 
             }
 
-            this.Text = $"Meteros: {meteros.Count} | t={time_metero} | {Ship1.x_speed} | {Ship1.y_speed} | Sub_time= {sub_time} | Time Sec = {time_level / 60}";
+            this.Text = $"Meteros: {meteros.Count} | t={time_metero} | {Ship1.x_speed} | {Ship1.y_speed} | Sub_time= {sub_time} | Time Sec = {time_level / 60} - Mouse: {mouseX} |  {mouseY} ";
             Invalidate();
         }
 
@@ -396,48 +407,92 @@ namespace SpaceShipGame
                     break;
             }
         }
-
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
+            
+        private void ReStartGame()
         {
-            if (!IsNotRunning)
-            {
-                return;
-            }
-            if (PlayButton.checkMouse(e.X, e.Y))
-            {
-                PlayButton.IsClicked = true;
-                PlayButton.frame_index = 2;
-            }
-        }
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!IsNotRunning)
-            {
-                return;
-            }
-            if (PlayButton.checkMouse(e.X, e.Y))
-            {
-                PlayButton.frame_index = PlayButton.IsClicked ? 2 : 1;
-            }
-            else
-            {
-                PlayButton.frame_index = 0;
-                PlayButton.IsClicked = false;
-            }
+            Ship1 = new Ship(this.ClientSize.Width, this.ClientSize.Height, 132);
+            Ship2 = new Ship(this.ClientSize.Width, this.ClientSize.Height, -100);
+            meteros.Clear();
+            fires.Clear();
+            explosive_effects.Clear();
+            time_metero = 0;
+            sub_time = 0;
+            time_level = 0;
+            SpawnEnergy = 0;
         }
         
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            mouseX = e.X;
+            mouseY = e.Y;
+            if (IsNotRunning && IsBegin)
+            {
+                if (PlayButton.checkMouse(e.X, e.Y))
+                {
+                    PlayButton.frame_index = PlayButton.IsClicked ? 2 : 1;
+                }
+                else
+                {
+                    PlayButton.frame_index = 0;
+                    PlayButton.IsClicked = false;
+                }
+            }
+            if (IsOver)
+            {
+                if (RestarButton.checkMouse(e.X, e.Y))
+                {
+                    RestarButton.frame_index = 1;
+                }
+                else
+                {
+                    RestarButton.frame_index = 0;
+                    RestarButton.IsClicked = false;
+                }
+            }
+        }
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (IsNotRunning && IsBegin)
+            {
+                if (PlayButton.checkMouse(e.X, e.Y))
+                {
+                    PlayButton.IsClicked = true;
+                    PlayButton.frame_index = 2;
+                }
+            }
+            else if (IsOver)
+            {
+                if (RestarButton.checkMouse(e.X, e.Y))
+                {
+                    RestarButton.IsClicked = true;
+                }
+            }
+
+        }
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!IsNotRunning)
+            if (IsNotRunning && IsBegin)
             {
-                return;
+                PlayButton.IsClicked = false;
+                if (PlayButton.checkMouse(e.X, e.Y))
+                {
+                    IsNotRunning = false;
+                    IsBegin = false;
+                }
             }
-            PlayButton.IsClicked = false;
-            if (PlayButton.checkMouse(e.X, e.Y))
+            else if (IsOver)
             {
-                IsNotRunning = false;
-                
+                if (RestarButton.checkMouse(e.X, e.Y))
+                {
+                    IsNotRunning = true;
+                    IsOver = false;
+                    IsBegin = true;
+                    ReStartGame();
+                    RestarButton.frame_index = 0;
+
+                }
             }
+            
         }
     }
 }

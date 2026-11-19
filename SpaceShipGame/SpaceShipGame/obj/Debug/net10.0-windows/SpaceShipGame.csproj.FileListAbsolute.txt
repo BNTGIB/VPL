@@ -79,3 +79,5 @@ D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\SpaceShip\fi
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\System\playbt2.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\System\playbt3.png
 D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\System\playbt1.png
+D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\System\restartbt.png
+D:\C#\VPL\SpaceShipGame\SpaceShipGame\bin\Debug\net10.0-windows\Img\System\restartbt2.png
